@@ -1,18 +1,10 @@
 import { useContext } from "react";
-import {
-  FlatList,
-  SafeAreaView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { FlatList, Text, View, TouchableOpacity } from "react-native";
 import { ActivityIndicator, Card, Colors, Searchbar } from "react-native-paper";
 import * as React from "react";
 import { EventInfoCard } from "../components/event-info-card.component";
 import styled from "styled-components/native";
 import { SafeArea } from "../../../components/utility/safe-area.component";
-import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { EventsContext } from "../../../services/events/events.context";
 import { Search } from "../components/search.component";
 
@@ -28,7 +20,7 @@ const Title = styled(Text)`
   padding-left: ${(props) => props.theme.space[4]};
 `;
 
-export const EventsScreen = () => {
+export const EventsScreen = ({ navigation }) => {
   const { isLoading, error, events } = useContext(EventsContext);
   return (
     <SafeArea>
@@ -48,7 +40,17 @@ export const EventsScreen = () => {
       <FlatList
         data={events}
         renderItem={({ item }) => {
-          return <EventInfoCard event={item} />;
+          return (
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate("EventDetail", {
+                  event: item,
+                })
+              }
+            >
+              <EventInfoCard event={item} />
+            </TouchableOpacity>
+          );
         }}
         keyExtractor={(item) => item.name}
         contentContainerStyle={{ padding: 16, marginTop: 16 }}
