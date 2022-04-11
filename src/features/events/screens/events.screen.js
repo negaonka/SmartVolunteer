@@ -21,7 +21,7 @@ const Title = styled(Text)`
 `;
 
 export const EventsScreen = ({ navigation }) => {
-  const { isLoading, error, events } = useContext(EventsContext);
+  const { isLoading, events } = useContext(EventsContext);
   return (
     <SafeArea>
       {isLoading && (

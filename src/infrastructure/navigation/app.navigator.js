@@ -1,11 +1,10 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { FontAwesome, FontAwesome5, Ionicons } from "@expo/vector-icons";
-import DonateScreen from "../../features/donate/screens/donate.screen";
-import { EventsScreen } from "../../features/events/screens/events.screen";
 import CoinsScreen from "../../features/coins/screens/coins.screen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { EventsNavigator } from "./events.navigator";
 import { MapsScreen } from "../../features/maps/screens/maps.screen";
+import { DonateNavigator } from "./donate.navigator";
 
 export const AppNavigator = () => {
   const Tab = createBottomTabNavigator();
@@ -47,7 +46,7 @@ export const AppNavigator = () => {
               headerShown: false, // change this to `false`
             }}
             name="Donate"
-            component={DonateScreen}
+            component={DonateNavigator}
           />
           <Tab.Screen
             options={{

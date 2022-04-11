@@ -8,7 +8,8 @@ import {
 import { SafeArea } from "../../../components/utility/safe-area.component";
 import styled from "styled-components/native";
 import { useState } from "react";
-import CheckBox from "@react-native-community/checkbox";
+import { CheckBox } from "react-native-elements";
+import { MaterialIcons } from "@expo/vector-icons";
 
 const Title = styled(Text)`
   color: grey;
@@ -18,10 +19,9 @@ const Title = styled(Text)`
   padding-left: ${(props) => props.theme.space[4]};
 `;
 
-export default function DonateScreen() {
+export const DonateScreen = ({ navigation }) => {
   const [donationAmount, setDonationAmount] = useState(null);
-  const [isSelected, setSelection] = useState(false);
-
+  const [donateMonthly, setDonateMonthly] = useState(false);
   return (
     <>
       <SafeArea>
@@ -70,17 +70,31 @@ export default function DonateScreen() {
           {/*<Text style={{ padding: 10, fontSize: 20 }}>£</Text>*/}
         </View>
         <View style={styles.checkboxContainer}>
-          {/*<CheckBox
-              value={isSelected}
-              onValueChange={setSelection}
-              style={styles.checkbox}
-            />*/}
-          <Text style={styles.label}>I want to donate this monthly</Text>
+          <CheckBox
+            checked={donateMonthly}
+            onPress={() => setDonateMonthly(!donateMonthly)}
+          />
+          <Text style={{ fontSize: 20, paddingTop: 13, color: "grey" }}>
+            I want to donate this monthly
+            {donateMonthly}
+          </Text>
         </View>
+        <MaterialIcons
+          name="arrow-forward-ios"
+          size={30}
+          color="#3895d3"
+          style={{ paddingLeft: 360 }}
+          onPress={() =>
+            navigation.navigate("PaymentScreen", {
+              item: donationAmount,
+              check: donateMonthly,
+            })
+          }
+        />
       </SafeArea>
     </>
   );
-}
+};
 
 //checkbox and change color on button is remaing
 
@@ -107,7 +121,7 @@ const styles = StyleSheet.create({
   },
   checkboxContainer: {
     flexDirection: "row",
-    padding: 40,
+    padding: 30,
   },
   label: {
     margin: 8,

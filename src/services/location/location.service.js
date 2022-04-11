@@ -1,5 +1,4 @@
 import * as Location from "expo-location";
-import { Platform } from "react-native";
 
 export const locationRequest = (searchKeyword) => {
   return fetch("http://192.168.1.150:5000/api/event/getEventsByLocation", {

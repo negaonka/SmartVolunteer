@@ -2,6 +2,7 @@ import React from "react";
 import { Text, TextInput, StyleSheet, View } from "react-native";
 import { Card } from "react-native-paper";
 import styled from "styled-components/native";
+import { FontAwesome5 } from "@expo/vector-icons";
 
 const EventCard = styled(Card)`
   background-color: #3895d3;
@@ -10,29 +11,31 @@ const EventCard = styled(Card)`
 
 const EventCardCover = styled(Card.Cover)`
   background-color: ${(props) => props.theme.colors.ui.tertiary};
-  padding: ${(props) => props.theme.space[3]};
+  padding: ${(props) => props.theme.space[2]};
 `;
 
 const Title = styled(Text)`
   font-family: ${(props) => props.theme.fonts.heading};
   font-size: ${(props) => props.theme.fontSizes.body};
   color: ${(props) => props.theme.colors.ui.tertiary};
+  padding: ${(props) => props.theme.space[2]}; ;
 `;
 
 const Date = styled(Text)`
   font-family: ${(props) => props.theme.fonts.heading};
-  font-size: ${(props) => props.theme.fontSizes.caption};
+  font-size: ${(props) => props.theme.fontSizes.button};
   color: ${(props) => props.theme.colors.ui.tertiary};
 `;
 
 const Rewards = styled(Text)`
   font-family: ${(props) => props.theme.fonts.heading};
-  font-size: ${(props) => props.theme.fontSizes.caption};
+  font-size: ${(props) => props.theme.fontSizes.button};
   color: ${(props) => props.theme.colors.ui.tertiary};
 `;
 
 const Info = styled(View)`
-  padding: ${(props) => props.theme.space[3]};
+  padding: ${(props) => props.theme.space[2]};
+  flex-direction: row;
 `;
 
 export const EventInfoCard = ({ event = {} }) => {
@@ -62,8 +65,15 @@ export const EventInfoCard = ({ event = {} }) => {
         </View>
         <Info>
           <Title>{eventTitle}</Title>
-          <Date>{dateOfEvent}</Date>
-          {/* <Rewards>{rewards}</Rewards>*/}
+          <View style={{ paddingLeft: 120 }}>
+            <Date style={{ paddingBottom: 5 }}>{dateOfEvent}</Date>
+            <Rewards>
+              {rewards}
+              <View style={{ paddingLeft: 5 }}>
+                <FontAwesome5 name="coins" size={15} color="white" />
+              </View>
+            </Rewards>
+          </View>
         </Info>
       </EventCard>
     </>
